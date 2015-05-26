@@ -16,7 +16,7 @@ var Git = module.exports = function (options) {
 };
 
 // git.exec(command [[, options], args ], callback)
-Git.prototype.exec = function (command, options, args, callback) {
+Git.prototype.exec = function (command, options, args, cwd, callback) {
   callback = arguments[arguments.length - 1];
 
   if (arguments.length == 2) {
@@ -34,7 +34,7 @@ Git.prototype.exec = function (command, options, args, callback) {
     + args;
 
   exec(cmd, {
-    cwd: this.cwd
+    cwd: cwd || this.cwd
   }, function (err, stdout, stderr) {
     callback(err, stdout);
   });
